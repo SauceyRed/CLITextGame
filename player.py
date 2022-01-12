@@ -5,24 +5,26 @@ import time
 from pprint import pprint
 
 class Player:
-    def __init__(self, name: str, _class: str):
+    def __init__(self, name: str, _class: str, ability_points: int = 10, strength: int = 0, agility: int = 0, intelligence: int = 0):
         self.name = name
         self._class = _class
-        self.ability_points = 10
-        self.strength = 0
-        self.agility = 0
-        self.intelligence = 0
+        self.ability_points = ability_points
+        self.strength = strength
+        self.agility = agility
+        self.intelligence = intelligence
 
-    def add_to_inv(self, item):
-        with open("inventory.json", "a") as inv:
-            json.dump(item, inv, indent=4)
+    def to_json(self):
+        return {
+            "name": self.name,
+            "_class": self._class,
+            "ability_points": self.ability_points,
+            "strength": self.strength,
+            "agility": self.agility,
+            "intelligence": self.intelligence
+        }
 
-    def get_inv(self):
-        with open("inventory.json", "r") as inv:
-            data = json.load(inv)
-            print(data["Sword"])
-
-# player = Player("Lucy", "female")
-# player.add_to_inv({"Weapons": {"Sword": {"Quantity": 1, "Durability": 8, "Attack": 3}}})
-# player.get_inv()
-# player.add_to_inv({"Potions": {"Healing Potion": {"Quantity": 1, "Uses": 1, "Healing": 10}}})
+class CustomEncoder(json.JSONEncoder):
+    def default(self, o):
+        if "to_json" in dir(o):
+            return o.to_json()
+        return json.JSONEncoder.default(self, o)
