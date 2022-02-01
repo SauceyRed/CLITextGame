@@ -5,9 +5,8 @@ import time
 from pprint import pprint
 
 class Player:
-    def __init__(self, name: str, _class: str, ability_points: int = 10, strength: int = 0, agility: int = 0, intelligence: int = 0):
+    def __init__(self, name: str, ability_points: int = 10, strength: int = 0, agility: int = 0, intelligence: int = 0):
         self.name = name
-        self._class = _class
         self.ability_points = ability_points
         self.strength = strength
         self.agility = agility
@@ -16,7 +15,6 @@ class Player:
     def to_json(self):
         return {
             "name": self.name,
-            "_class": self._class,
             "ability_points": self.ability_points,
             "strength": self.strength,
             "agility": self.agility,
