@@ -1,0 +1,1 @@
+To make sure you have all the required Python packages to run the game, execute "pip install -r requirements.txt".

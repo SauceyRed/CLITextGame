@@ -5,7 +5,10 @@ from sys import platform
 import asyncio
 import os
 
-# Add so it generates a key if key file not in secure folder or path
+"""
+This script creates the folders necessary to hold save files and the encryption key
+for save files in a cross-platform way.
+"""
 
 game_path = os.getcwd()
 saves_path = os.path.join(game_path, "saves")
